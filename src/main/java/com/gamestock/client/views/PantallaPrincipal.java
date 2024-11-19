@@ -20,16 +20,20 @@ public class PantallaPrincipal extends JFrame {
     private JButton botoClients;
     private JButton botoJocs;
     private JButton botoLloguers;
+    private JButton botoUsuaris;
     public JPanel panelPrincipal;
+    private boolean esAdministrador;
 
     /**
      * Constructor de la classe PantallaPrincipal.
      * Configura la interfície gràfica i inicialitza els components de la pantalla principal.
      */
-    public PantallaPrincipal() {
+    public PantallaPrincipal(boolean esAdministrador) {
+        this.esAdministrador = esAdministrador;
         panelPrincipal = new JPanel();
         panelPrincipal.setLayout(new GridBagLayout());
         panelPrincipal.setBorder(new EmptyBorder(10, 20, 10, 20));
+        
         final JPanel panel1 = new JPanel();
         panel1.setLayout(new GridBagLayout());
         panel1.setBorder(new EmptyBorder(0, 20, 0, 20));
@@ -41,6 +45,7 @@ public class PantallaPrincipal extends JFrame {
         gbc.anchor = GridBagConstraints.NORTH;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panelPrincipal.add(panel1, gbc);
+        
         final JLabel label1 = new JLabel();
         label1.setText("Accions:");
         gbc = new GridBagConstraints();
@@ -49,6 +54,7 @@ public class PantallaPrincipal extends JFrame {
         gbc.weightx = 1.0;
         gbc.anchor = GridBagConstraints.WEST;
         panel1.add(label1, gbc);
+        
         botoAfegir = new JButton();
         botoAfegir.setText("Afegir");
         gbc = new GridBagConstraints();
@@ -57,6 +63,7 @@ public class PantallaPrincipal extends JFrame {
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel1.add(botoAfegir, gbc);
+        
         botoEditar = new JButton();
         botoEditar.setText("Editar");
         gbc = new GridBagConstraints();
@@ -65,6 +72,7 @@ public class PantallaPrincipal extends JFrame {
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel1.add(botoEditar, gbc);
+        
         botoEliminar = new JButton();
         botoEliminar.setText("Eliminar");
         gbc = new GridBagConstraints();
@@ -74,12 +82,14 @@ public class PantallaPrincipal extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel1.add(botoEliminar, gbc);
         final JLabel label2 = new JLabel();
+        
         label2.setText("Dades:");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 4;
         gbc.weightx = 1.0;
         gbc.anchor = GridBagConstraints.WEST;
+        
         panel1.add(label2, gbc);
         botoClients = new JButton();
         botoClients.setText("Clients");
@@ -89,6 +99,7 @@ public class PantallaPrincipal extends JFrame {
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel1.add(botoClients, gbc);
+        
         botoJocs = new JButton();
         botoJocs.setText("Jocs");
         gbc = new GridBagConstraints();
@@ -97,6 +108,7 @@ public class PantallaPrincipal extends JFrame {
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel1.add(botoJocs, gbc);
+        
         botoLloguers = new JButton();
         botoLloguers.setText("Lloguers");
         gbc = new GridBagConstraints();
@@ -105,6 +117,17 @@ public class PantallaPrincipal extends JFrame {
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel1.add(botoLloguers, gbc);
+        
+        if (esAdministrador) {
+            botoUsuaris = new JButton("Usuaris");
+            gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 8;
+            gbc.weightx = 1.0;
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            panel1.add(botoUsuaris, gbc);
+        }
+        
         final JScrollPane scrollPane1 = new JScrollPane();
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -139,40 +162,88 @@ public class PantallaPrincipal extends JFrame {
         return (DefaultTableModel) taulaPrincipal.getModel();
     }
 
-    /**
-     * Obté el botó d'afegir.
-     *
-     * @return El botó d'afegir.
-     */
-    public AbstractButton getBotoAfegir() {
-        return botoAfegir;
-    }
-
-    /**
-     * Obté el botó d'eliminar.
-     *
-     * @return El botó d'eliminar.
-     */
-    public AbstractButton getBotoEliminar() {
-        return botoEliminar;
-    }
-
-    /**
-     * Obté la taula de clients.
-     *
-     * @return La taula de clients.
-     */
-    public JTable getTaulaClients() {
+    public JTable getTaulaPrincipal() {
         return taulaPrincipal;
     }
 
-    /**
-     * Obté el botó d'editar.
-     *
-     * @return El botó d'editar.
-     */
-    public AbstractButton getBotoEditar() {
+    public void setTaulaPrincipal(JTable taulaPrincipal) {
+        this.taulaPrincipal = taulaPrincipal;
+    }
+
+    public JButton getBotoAfegir() {
+        return botoAfegir;
+    }
+
+    public void setBotoAfegir(JButton botoAfegir) {
+        this.botoAfegir = botoAfegir;
+    }
+
+    public JButton getBotoEliminar() {
+        return botoEliminar;
+    }
+
+    public void setBotoEliminar(JButton botoEliminar) {
+        this.botoEliminar = botoEliminar;
+    }
+
+    public JButton getBotoEditar() {
         return botoEditar;
     }
+
+    public void setBotoEditar(JButton botoEditar) {
+        this.botoEditar = botoEditar;
+    }
+
+    public JButton getBotoClients() {
+        return botoClients;
+    }
+
+    public void setBotoClients(JButton botoClients) {
+        this.botoClients = botoClients;
+    }
+
+    public JButton getBotoJocs() {
+        return botoJocs;
+    }
+
+    public void setBotoJocs(JButton botoJocs) {
+        this.botoJocs = botoJocs;
+    }
+
+    public JButton getBotoLloguers() {
+        return botoLloguers;
+    }
+
+    public void setBotoLloguers(JButton botoLloguers) {
+        this.botoLloguers = botoLloguers;
+    }
+
+    public JButton getBotoUsuaris() {
+        return botoUsuaris;
+    }
+
+    public void setBotoUsuaris(JButton botoUsuaris) {
+        this.botoUsuaris = botoUsuaris;
+    }
+
+    public JPanel getPanelPrincipal() {
+        return panelPrincipal;
+    }
+
+    public void setPanelPrincipal(JPanel panelPrincipal) {
+        this.panelPrincipal = panelPrincipal;
+    }
+
+    public boolean isEsAdministrador() {
+        return esAdministrador;
+    }
+
+    public void setEsAdministrador(boolean esAdministrador) {
+        this.esAdministrador = esAdministrador;
+    }
+    
+    
+    
+    
 
 }

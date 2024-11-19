@@ -6,26 +6,71 @@ import java.time.LocalDate;
  * Classe que representa un lloguer d'un joc per part d'un client.
  */
 public class Lloguer {
-    private int id; // Identificador únic del lloguer
-    private Joc joc; // Joc que està sent llogat
-    private Client client; // Client que ha realitzat el lloguer
-    private LocalDate dataLloguer; // Data en què s'ha realitzat el lloguer
-    private LocalDate dataRetorn; // Data en què es retorna el joc (pot ser null si encara no s'ha retornat)
+    private int idClient;
+    private int idJoc;
+    private String dataLloguer;
+    private String dataRetorn;
+    private double preu;
 
     /**
      * Crea un nou lloguer amb les dades especificades.
      *
-     * @param id          Identificador únic del lloguer.
-     * @param joc        Joc que es lloga.
-     * @param client    Client que lloga el joc.
-     * @param dataLloguer  Data en què s'ha realitzat el lloguer.
+     * @param idClient  Identificador del client
+     * @param idJoc     Identificador del joc llogat
+     * @param dataLloguer   Data de quan es va llogar el joc
+     * @param dataRetorn    Data de quan s'ha de retornar el joc
+     * @param preu          Import de la transacció (import es una paraula reservada de java i no es pot utilitzar)
      */
-    public Lloguer(int id, Joc joc, Client client, LocalDate dataLloguer) {
-        this.id = id;
-        this.joc = joc;
-        this.client = client;
+    public Lloguer(int idClient, int idJoc, String dataLloguer, String dataRetorn, double preu) {
+        this.idClient = idClient;
+        this.idJoc = idJoc;
         this.dataLloguer = dataLloguer;
-        this.dataRetorn = null; // Per defecte, el joc no ha estat retornat
+        this.dataRetorn = dataRetorn;
+        this.preu = preu;
     }
 
+    public int getIdClient() {
+        return idClient;
+    }
+
+    public void setIdClient(int idClient) {
+        this.idClient = idClient;
+    }
+
+    public int getIdJoc() {
+        return idJoc;
+    }
+
+    public void setIdJoc(int idJoc) {
+        this.idJoc = idJoc;
+    }
+
+    public String getDataLloguer() {
+        return dataLloguer;
+    }
+
+    public void setDataLloguer(String dataLloguer) {
+        this.dataLloguer = dataLloguer;
+    }
+
+    public String getDataRetorn() {
+        return dataRetorn;
+    }
+
+    public void setDataRetorn(String dataRetorn) {
+        this.dataRetorn = dataRetorn;
+    }
+
+    public double getPreu() {
+        return preu;
+    }
+
+    public void setPreu(double preu) {
+        this.preu = preu;
+    }
+
+    @Override
+    public String toString() {
+        return "Lloguer{" + "idClient=" + idClient + ", idJoc=" + idJoc + ", dataLloguer=" + dataLloguer + ", dataRetorn=" + dataRetorn + ", preu=" + preu + '}';
+    }
 }

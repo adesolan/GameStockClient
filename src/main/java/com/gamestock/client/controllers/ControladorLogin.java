@@ -1,5 +1,6 @@
 package com.gamestock.client.controllers;
 
+import com.gamestock.client.serveis.ServeiClient;
 import com.gamestock.client.views.PantallaLogin;
 
 import javax.swing.*;
@@ -11,6 +12,7 @@ import javax.swing.*;
  */
 public class ControladorLogin {
     private final PantallaLogin pantallaLogin;
+    private final ServeiClient conexioServidor;
 
     /**
      * Constructor del controlador de login.
@@ -24,18 +26,25 @@ public class ControladorLogin {
         pantallaLogin.setSize(300, 250);
         pantallaLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pantallaLogin.setLocationRelativeTo(null); // Centra la finestra al centre de la pantalla
+        
+        //Obté la connexió amb el servidor
+        this.conexioServidor = ServeiClient.getInstance();
 
         // Afegeix una acció que s'executa quan l'usuari intenta fer login
-        pantallaLogin.afegirAccioLogin(_ -> {
+        pantallaLogin.afegirAccioLogin(e -> {
             String usuari = pantallaLogin.getUsuari();
             String contrasenya = pantallaLogin.getContrasenya();
 
-            // Comprova si les credencials són correctes, son de prova fins que no pogui accedir al servidor
-            if (usuari.equals("admin") && contrasenya.equals("1234")) {
+            // Validar credencials amb el servidor
+            Boolean[] resposta = conexioServidor.validarCredencials(usuari, contrasenya);
+            boolean validat = resposta[0];
+            boolean esAdministrador = resposta[1];
+            
+            if (validat) {
                 // Si l'usuari i contrasenya són correctes, es tanca la pantalla de login
                 pantallaLogin.dispose();
                 // Es crea un nou controlador per a la pantalla principal
-                new ControladorPrincipal();
+                new ControladorPrincipal(esAdministrador);
             } else {
                 JOptionPane.showMessageDialog(pantallaLogin, "Usuari o contrasenya incorrectes");
             }
