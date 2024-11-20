@@ -1,28 +1,27 @@
 package com.gamestock.client.models;
 
 /**
- * Classe que representa un joc disponible per llogar.
+ * Classe que representa un joc disponible per llogar
  */
 public class Joc {
-    private int id; // Identificador únic del joc
-    private String titol; // Títol del joc
-    private String genere; // Gènere del joc (ex: acció, aventura, etc.)
-    private String estudi; // Estudi que ha creat el joc
-    private double preuLloguer; // Preu de lloguer del joc
-    private int stock; // Quants jocs tenim a la botiga
+    private long id;
+    private String titol;
+    private String genere;
+    private String estudi;
+    private double preuLloguer;
+    private int stock;
 
     /**
      * Crea un nou joc amb les dades especificades.
-     * Inicialment, el joc està disponible per al lloguer.
      *
      * @param id          Identificador únic del joc.
      * @param titol       Títol del joc.
-     * @param genere      Gènere del joc.
-     * @param estudi      Estudi que ha creat el joc
+     * @param genere      Gènere del joc (ex: acció, aventura, etc.).
+     * @param estudi      Estudi que ha creat el joc.
      * @param preuLloguer Preu de lloguer del joc.
-     * @param stock       Quants jocs tenim a la botiga
+     * @param stock       Quantitat de jocs disponibles a la botiga.
      */
-    public Joc(int id, String titol, String genere, String estudi, double preuLloguer, int stock) {
+    public Joc(long id, String titol, String genere, String estudi, double preuLloguer, int stock) {
         this.id = id;
         this.titol = titol;
         this.genere = genere;
@@ -31,59 +30,121 @@ public class Joc {
         this.stock = stock;
     }
 
-    public int getId() {
+    /**
+     * Obté l'identificador únic del joc.
+     *
+     * @return Identificador del joc.
+     */
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    /**
+     * Assigna un identificador únic al joc.
+     *
+     * @param id Identificador a assignar al joc.
+     */
+    public void setId(long id) {
         this.id = id;
     }
 
+    /**
+     * Obté el títol del joc.
+     *
+     * @return Títol del joc.
+     */
     public String getTitol() {
         return titol;
     }
 
+    /**
+     * Assigna un títol al joc.
+     *
+     * @param titol Títol a assignar al joc.
+     */
     public void setTitol(String titol) {
         this.titol = titol;
     }
 
+    /**
+     * Obté el gènere del joc.
+     *
+     * @return Gènere del joc.
+     */
     public String getGenere() {
         return genere;
     }
 
+    /**
+     * Assigna un gènere al joc.
+     *
+     * @param genere Gènere a assignar al joc.
+     */
     public void setGenere(String genere) {
         this.genere = genere;
     }
 
+    /**
+     * Obté l'estudi que ha creat el joc.
+     *
+     * @return Estudi que ha creat el joc.
+     */
     public String getEstudi() {
         return estudi;
     }
 
+    /**
+     * Assigna un estudi al joc.
+     *
+     * @param estudi Estudi a assignar al joc.
+     */
     public void setEstudi(String estudi) {
         this.estudi = estudi;
     }
 
+    /**
+     * Obté el preu de lloguer del joc.
+     *
+     * @return Preu de lloguer del joc.
+     */
     public double getPreuLloguer() {
         return preuLloguer;
     }
 
+    /**
+     * Assigna un preu de lloguer al joc.
+     *
+     * @param preuLloguer Preu de lloguer a assignar al joc.
+     */
     public void setPreuLloguer(double preuLloguer) {
         this.preuLloguer = preuLloguer;
     }
 
+    /**
+     * Obté la quantitat de jocs disponibles a la botiga.
+     *
+     * @return Nombre de jocs disponibles.
+     */
     public int getStock() {
         return stock;
     }
 
+    /**
+     * Assigna un valor al stock de jocs disponibles a la botiga.
+     *
+     * @param stock Nombre de jocs a assignar al stock.
+     */
     public void setStock(int stock) {
         this.stock = stock;
     }
 
+    /**
+     * Retorna una representació en forma de cadena de caràcters del joc.
+     *
+     * @return Cadena amb la representació del joc.
+     */
     @Override
     public String toString() {
         return "Joc{" + "id=" + id + ", titol=" + titol + ", genere=" + genere + ", estudi=" + estudi + ", preuLloguer=" + preuLloguer + ", stock=" + stock + '}';
     }
-    
-    
-
 }

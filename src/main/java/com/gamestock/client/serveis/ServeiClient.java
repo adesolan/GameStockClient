@@ -27,6 +27,7 @@ public class ServeiClient {
         this.baseUrl = baseUrl;
         this.webClient = WebClient.builder()
                 .baseUrl(baseUrl) // Assigna la base URL passada com a paràmetre
+                
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .build();
     }
@@ -52,7 +53,7 @@ public class ServeiClient {
 
     // Obtenir tots els clients
     public List<Client> obtenirClients() {
-        String url = "clients";
+        String url = "api/clientes";
         return obtenirDades(url, Client.class);
     }
 
@@ -100,7 +101,7 @@ public class ServeiClient {
         return result;  // Retornem la llista de resultats
     }
 
-// Validar credencials d'un usuari
+    // Validar credencials d'un usuari
     public Boolean[] validarCredencials(String usuari, String contrasenya) {
         String url = "login/validate?username=" + usuari + "&password=" + contrasenya;
 
@@ -121,14 +122,19 @@ public class ServeiClient {
 
     // Afegir un client
     public boolean afegirClient(Client nouClient) {
-        String url = "clients";
-        Mono<Boolean> response = webClient.post()
-                .uri(url)
-                .bodyValue(nouClient)
-                .retrieve()
-                .bodyToMono(Boolean.class);
-
-        return response.block();
+        String url = "clientes";
+        try {
+            webClient.post()
+                    .uri(url)
+                    .bodyValue(nouClient)
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block();
+            return true;
+        } catch (WebClientResponseException e) {
+            System.err.println("Error afegint client: " + e.getStatusCode() + " - " + e.getMessage());
+            return false;
+        }
     }
 
     // Eliminar un client per ID
@@ -258,4 +264,20 @@ public class ServeiClient {
 
         return response.block();
     }
+
+    // Obtenir un client pel seu ID
+    public Client obtenirClientPerId(Long id) {
+        String url = "clientes/" + id;
+        try {
+            return webClient.get()
+                    .uri(url)
+                    .retrieve()
+                    .bodyToMono(Client.class)
+                    .block();
+        } catch (WebClientResponseException e) {
+            System.err.println("Error obtenint client per ID: " + e.getStatusCode() + " - " + e.getMessage());
+            return null;
+        }
+    }
+
 }

@@ -29,6 +29,8 @@ public class ControladorPrincipal {
     /**
      * Constructor del controlador principal. Inicialitza la pantalla principal,
      * carrega els clients i afegeix els listeners per a les accions.
+     * 
+     * @param esAdministrador Indica si l'usuari té permisos d'administrador.
      */
     public ControladorPrincipal(boolean esAdministrador) {
         pantallaPrincipal = new PantallaPrincipal(esAdministrador);

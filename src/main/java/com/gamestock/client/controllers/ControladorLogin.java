@@ -30,6 +30,13 @@ public class ControladorLogin {
         //Obté la connexió amb el servidor
         this.conexioServidor = ServeiClient.getInstance();
 
+        //Fins que el servidor no pugui autenticar usuaris, farem això:
+        
+        pantallaLogin.afegirAccioLogin(e -> {
+               pantallaLogin.dispose();
+                new ControladorPrincipal(false);
+        });
+        /*
         // Afegeix una acció que s'executa quan l'usuari intenta fer login
         pantallaLogin.afegirAccioLogin(e -> {
             String usuari = pantallaLogin.getUsuari();
@@ -48,7 +55,8 @@ public class ControladorLogin {
             } else {
                 JOptionPane.showMessageDialog(pantallaLogin, "Usuari o contrasenya incorrectes");
             }
-        });
+            
+        });*/
 
         pantallaLogin.setVisible(true);
     }
