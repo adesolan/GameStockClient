@@ -1,14 +1,22 @@
 package com.gamestock.client.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Classe que representa un joc disponible per llogar
  */
 public class Joc {
+    @JsonProperty("id")
     private long id;
+    @JsonProperty("nombre")
     private String titol;
+    @JsonProperty("genero")
     private String genere;
+    @JsonProperty("estudio")
     private String estudi;
+    @JsonProperty("precio")
     private double preuLloguer;
+    @JsonProperty("stock")
     private int stock;
 
     /**

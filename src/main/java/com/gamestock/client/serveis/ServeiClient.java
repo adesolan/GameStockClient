@@ -5,29 +5,33 @@ import com.gamestock.client.models.Joc;
 import com.gamestock.client.models.Lloguer;
 import com.gamestock.client.models.Usuari;
 import com.gamestock.client.models.RespostaLogin;
+import io.micrometer.common.util.StringUtils;
 import java.util.ArrayList;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.reactive.function.BodyInserters;
 
 public class ServeiClient {
 
     private static ServeiClient instance;
     private final WebClient webClient;
     private final String baseUrl;
+    private static String usuariActual;
 
     // Constructor privat per al singleton
     private ServeiClient(String baseUrl) {
         this.baseUrl = baseUrl;
         this.webClient = WebClient.builder()
                 .baseUrl(baseUrl) // Assigna la base URL passada com a paràmetre
-                
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .build();
     }
@@ -53,25 +57,25 @@ public class ServeiClient {
 
     // Obtenir tots els clients
     public List<Client> obtenirClients() {
-        String url = "api/clientes";
+        String url = "/api/clientes";
         return obtenirDades(url, Client.class);
     }
 
     // Obtenir tots els jocs
     public List<Joc> obtenirJocs() {
-        String url = "jocs";
+        String url = "/api/juegos";
         return obtenirDades(url, Joc.class);
     }
 
     // Obtenir tots els lloguers
     public List<Lloguer> obtenirLloguers() {
-        String url = "lloguers";
+        String url = "/api/alquileres";
         return obtenirDades(url, Lloguer.class);
     }
 
     // Obtenir tots els usuaris
     public List<Usuari> obtenirUsuaris() {
-        String url = "usuaris";
+        String url = "/api/users";
         return obtenirDades(url, Usuari.class);
     }
 
@@ -101,28 +105,10 @@ public class ServeiClient {
         return result;  // Retornem la llista de resultats
     }
 
-    // Validar credencials d'un usuari
-    public Boolean[] validarCredencials(String usuari, String contrasenya) {
-        String url = "login/validate?username=" + usuari + "&password=" + contrasenya;
-
-        // Petició GET que retorna un objecte RespostaLogin
-        Mono<RespostaLogin> resposta = webClient.get()
-                .uri(url)
-                .retrieve()
-                .bodyToMono(RespostaLogin.class);
-
-        // Transformar l'objecte RespostaLogin a Boolean[]
-        RespostaLogin respostaLogin = resposta.block();
-        if (respostaLogin == null) {
-            return new Boolean[]{false, false}; // En cas d'error, valors per defecte
-        }
-
-        return new Boolean[]{respostaLogin.isAutenticat(), respostaLogin.isAdministrador()};
-    }
-
     // Afegir un client
     public boolean afegirClient(Client nouClient) {
-        String url = "clientes";
+        String url = "/api/clientes";
+        System.out.println(nouClient);
         try {
             webClient.post()
                     .uri(url)
@@ -130,6 +116,7 @@ public class ServeiClient {
                     .retrieve()
                     .bodyToMono(String.class)
                     .block();
+            
             return true;
         } catch (WebClientResponseException e) {
             System.err.println("Error afegint client: " + e.getStatusCode() + " - " + e.getMessage());
@@ -138,136 +125,136 @@ public class ServeiClient {
     }
 
     // Eliminar un client per ID
-    public boolean eliminarClient(int id) {
-        String url = "clients/" + id;
-        Mono<Boolean> response = webClient.delete()
+    public boolean eliminarClient(long id) {
+        String url = "/api/clientes/" + id;
+        Mono<String> response = webClient.delete()
                 .uri(url)
                 .retrieve()
-                .bodyToMono(Boolean.class);
+                .bodyToMono(String.class);
 
-        return response.block();
+        return !StringUtils.isEmpty(response.block());
     }
 
     // Editar un client
     public boolean editarClient(Client clientEditat) {
-        String url = "clients/" + clientEditat.getId();
-        Mono<Boolean> response = webClient.put()
+        String url = "/api/clientes/" + clientEditat.getId();
+        Mono<String> response = webClient.put()
                 .uri(url)
                 .bodyValue(clientEditat)
                 .retrieve()
-                .bodyToMono(Boolean.class);
+                .bodyToMono(String.class);
 
-        return response.block();
+        return !StringUtils.isEmpty(response.block());
     }
 
     // Afegir un joc
     public boolean afegirJoc(Joc nouJoc) {
-        String url = "jocs";
-        Mono<Boolean> response = webClient.post()
+        String url = "/api/juegos";
+        Mono<String> response = webClient.post()
                 .uri(url)
                 .bodyValue(nouJoc)
                 .retrieve()
-                .bodyToMono(Boolean.class);
+                .bodyToMono(String.class);
 
-        return response.block();
+        return !StringUtils.isEmpty(response.block());
     }
 
     // Eliminar un joc per ID
-    public boolean eliminarJoc(int id) {
-        String url = "jocs/" + id;
-        Mono<Boolean> response = webClient.delete()
+    public boolean eliminarJoc(long id) {
+        String url = "/api/juegos/" + id;
+        Mono<String> response = webClient.delete()
                 .uri(url)
                 .retrieve()
-                .bodyToMono(Boolean.class);
+                .bodyToMono(String.class);
 
-        return response.block();
+        return !StringUtils.isEmpty(response.block());
     }
 
     // Editar un joc
     public boolean editarJoc(Joc jocEditat) {
-        String url = "jocs/" + jocEditat.getId();
-        Mono<Boolean> response = webClient.put()
+        String url = "/api/juegos/" + jocEditat.getId();
+        Mono<String> response = webClient.put()
                 .uri(url)
                 .bodyValue(jocEditat)
                 .retrieve()
-                .bodyToMono(Boolean.class);
+                .bodyToMono(String.class);
 
-        return response.block();
+        return !StringUtils.isEmpty(response.block());
     }
 
     // Afegir un lloguer
     public boolean afegirLloguer(Lloguer nouLloguer) {
-        String url = "lloguers";
-        Mono<Boolean> response = webClient.post()
+        String url = "/api/alquileres";
+        Mono<String> response = webClient.post()
                 .uri(url)
                 .bodyValue(nouLloguer)
                 .retrieve()
-                .bodyToMono(Boolean.class);
+                .bodyToMono(String.class);
 
-        return response.block();
+        return !StringUtils.isEmpty(response.block());
     }
 
     // Eliminar un lloguer
-    public boolean eliminarLloguer(int id) {
-        String url = "lloguers/" + id;
-        Mono<Boolean> response = webClient.delete()
+    public boolean eliminarLloguer(long id) {
+        String url = "/api/alquileres/" + id;
+        Mono<String> response = webClient.delete()
                 .uri(url)
                 .retrieve()
-                .bodyToMono(Boolean.class);
+                .bodyToMono(String.class);
 
-        return response.block();
+        return !StringUtils.isEmpty(response.block());
     }
 
     // Editar un lloguer
     public boolean editarLloguer(Lloguer lloguerEditat) {
-        String url = "lloguers/" + lloguerEditat.getIdClient();
-        Mono<Boolean> response = webClient.put()
+        String url = "/api/alquileres/" + lloguerEditat.getIdClient();
+        Mono<String> response = webClient.put()
                 .uri(url)
                 .bodyValue(lloguerEditat)
                 .retrieve()
-                .bodyToMono(Boolean.class);
+                .bodyToMono(String.class);
 
-        return response.block();
+        return !StringUtils.isEmpty(response.block());
     }
 
     // Afegir un usuari
     public boolean afegirUsuari(Usuari nouUsuari) {
-        String url = "usuaris";
-        Mono<Boolean> response = webClient.post()
+        String url = "/api/users";
+        Mono<String> response = webClient.post()
                 .uri(url)
                 .bodyValue(nouUsuari)
                 .retrieve()
-                .bodyToMono(Boolean.class);
+                .bodyToMono(String.class);
 
-        return response.block();
+        return !StringUtils.isEmpty(response.block());
     }
 
     // Eliminar un usuari
-    public boolean eliminarUsuari(int id) {
-        String url = "usuaris/" + id;
-        Mono<Boolean> response = webClient.delete()
+    public boolean eliminarUsuari(long id) {
+        String url = "/api/users/" + id;
+        Mono<String> response = webClient.delete()
                 .uri(url)
                 .retrieve()
-                .bodyToMono(Boolean.class);
+                .bodyToMono(String.class);
 
-        return response.block();
+        return !StringUtils.isEmpty(response.block());
     }
 
     // Editar un usuari
     public boolean editarUsuari(Usuari usuariEditat) {
-        String url = "usuaris/" + usuariEditat.getUsername();
-        Mono<Boolean> response = webClient.put()
+        String url = "/api/users/" + usuariEditat.getId();
+        Mono<String> response = webClient.put()
                 .uri(url)
                 .bodyValue(usuariEditat)
                 .retrieve()
-                .bodyToMono(Boolean.class);
+                .bodyToMono(String.class);
 
-        return response.block();
+        return !StringUtils.isEmpty(response.block());
     }
 
     // Obtenir un client pel seu ID
-    public Client obtenirClientPerId(Long id) {
-        String url = "clientes/" + id;
+    public Client obtenirClientPerId(long id) {
+        String url = "/api/clientes/" + id;
         try {
             return webClient.get()
                     .uri(url)
@@ -277,6 +264,51 @@ public class ServeiClient {
         } catch (WebClientResponseException e) {
             System.err.println("Error obtenint client per ID: " + e.getStatusCode() + " - " + e.getMessage());
             return null;
+        }
+    }
+    
+    public boolean validarCredencials(String usuari, String contrasenya) {
+    String url = "/api/users/login";
+    try {
+        // Construir la petició
+        RespostaLogin loginRequest = new RespostaLogin(usuari, contrasenya);
+
+        // Enviar la petició al servidor
+        webClient.post()
+                .uri(url)
+                .bodyValue(loginRequest)
+                .retrieve()
+                .toBodilessEntity()
+                .block();
+
+        // Si no hi ha cap error, el login ha estat exitós
+        usuariActual = usuari;
+        return true;
+
+    } catch (WebClientResponseException e) {
+        if (e.getStatusCode() == HttpStatus.UNAUTHORIZED) {
+            System.err.println("Credencials incorrectes: " + e.getMessage());
+        } else {
+            System.err.println("Error inesperat: " + e.getMessage());
+        }
+        return false;
+    }
+}
+
+    // Tancar sessió
+    public boolean tancarSessio() {
+        String url = "/api/users/logout";
+        try {
+            webClient.post()
+                    .uri(url)
+                    .bodyValue(Map.of("username", usuariActual))
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block();
+            return true;
+        } catch (WebClientResponseException e) {
+            System.err.println("Error tancant sessió: " + e.getStatusCode() + " - " + e.getMessage());
+            return false;
         }
     }
 

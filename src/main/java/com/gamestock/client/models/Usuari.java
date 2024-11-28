@@ -1,12 +1,20 @@
 package com.gamestock.client.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Classe que representa un usuari
  */
 public class Usuari {
-    private String username; // Nom d'usuari
+    @JsonProperty("id")
+    private long id;
+    @JsonProperty("username")
+    private String username;
+    @JsonProperty("password")
     private String password; // Contrasenya
+    @JsonProperty("email")
     private String email;    // Correu electrònic
+    @JsonProperty("role")
     private String role;     // Rol de l'usuari ("admin" o "usuari")
 
     /**
@@ -17,13 +25,24 @@ public class Usuari {
      * @param email    Correu electrònic de l'usuari.
      * @param role     Rol de l'usuari ("admin" o "usuari").
      */
-    public Usuari(String username, String password, String email, String role) {
+    public Usuari(long id, String username, String password, String email, String role) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
         this.role = role;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    
+    
     /**
      * Obté el nom d'usuari.
      *
@@ -104,6 +123,7 @@ public class Usuari {
     @Override
     public String toString() {
         return "Usuari{" +
+               "id='" + id + '\'' +
                "username='" + username + '\'' +
                ", password='" + password + '\'' +
                ", email='" + email + '\'' +

@@ -17,7 +17,7 @@ public class App {
      */
     public static void main(String[] args) {
         // Inicia el servei client amb la URL del servidor
-        ServeiClient.getInstance("https://127.0.0.1:8443");
+        ServeiClient.getInstance("http://127.0.0.1:9090");
         
         // Inicia el controlador de login
         new ControladorLogin();

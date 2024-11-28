@@ -1,14 +1,22 @@
 package com.gamestock.client.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Classe que representa un client de la botiga
  */
 public class Client {
+    @JsonProperty("id")
     private long id;
+    @JsonProperty("nombre")
     private String nom;
+    @JsonProperty("apellido1")
     private String cognom1;
+    @JsonProperty("apellido2")
     private String cognom2;
+    @JsonProperty("email")
     private String email;
+    @JsonProperty("telefono")
     private String telefon;
 
     /**

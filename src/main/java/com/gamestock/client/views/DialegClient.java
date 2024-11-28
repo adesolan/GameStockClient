@@ -68,14 +68,6 @@ public class DialegClient extends JDialog {
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.WEST;
         panelDialeg.add(label1, gbc);
-        textCodi = new JTextField();
-        gbc = new GridBagConstraints();
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        gbc.weightx = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panelDialeg.add(textCodi, gbc);
         
         final JLabel label2 = new JLabel();
         label2.setText("Nom:");
@@ -89,7 +81,7 @@ public class DialegClient extends JDialog {
         label3.setText("Cognom1:");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy = 2;
         gbc.anchor = GridBagConstraints.WEST;
         panelDialeg.add(label3, gbc);
         
@@ -97,7 +89,7 @@ public class DialegClient extends JDialog {
         label4.setText("Cognom2:");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy = 3;
         gbc.anchor = GridBagConstraints.WEST;
         panelDialeg.add(label4, gbc);
         
@@ -105,7 +97,7 @@ public class DialegClient extends JDialog {
         label5.setText("Email:");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 4;
         gbc.anchor = GridBagConstraints.WEST;
         panelDialeg.add(label5, gbc);
         
@@ -113,9 +105,18 @@ public class DialegClient extends JDialog {
         label6.setText("Telefon:");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 5;
         gbc.anchor = GridBagConstraints.WEST;
         panelDialeg.add(label6, gbc);
+        
+        textCodi = new JTextField();
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        panelDialeg.add(textCodi, gbc);
         
         textNom = new JTextField();
         gbc = new GridBagConstraints();
@@ -129,7 +130,7 @@ public class DialegClient extends JDialog {
         textCognom1 = new JTextField();
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
-        gbc.gridy = 1;
+        gbc.gridy = 2;
         gbc.weightx = 1.0;
         gbc.anchor = GridBagConstraints.WEST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -138,7 +139,7 @@ public class DialegClient extends JDialog {
         textCognom2 = new JTextField();
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
-        gbc.gridy = 1;
+        gbc.gridy = 3;
         gbc.weightx = 1.0;
         gbc.anchor = GridBagConstraints.WEST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -147,7 +148,7 @@ public class DialegClient extends JDialog {
         textEmail = new JTextField();
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
-        gbc.gridy = 2;
+        gbc.gridy = 4;
         gbc.weightx = 1.0;
         gbc.anchor = GridBagConstraints.WEST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -156,7 +157,7 @@ public class DialegClient extends JDialog {
         textTelefon = new JTextField();
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
-        gbc.gridy = 3;
+        gbc.gridy = 5;
         gbc.weightx = 1.0;
         gbc.anchor = GridBagConstraints.WEST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -166,7 +167,7 @@ public class DialegClient extends JDialog {
         botoConfirmar.setText("Confirmar");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 5;
+        gbc.gridy = 6;
         gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         
@@ -175,7 +176,7 @@ public class DialegClient extends JDialog {
         botoCancelar.setText("Cancelar");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 6;
+        gbc.gridy = 7;
         gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         
@@ -192,7 +193,7 @@ public class DialegClient extends JDialog {
      */
     public void confirmar() {
         try {
-            int id = Integer.parseInt(textCodi.getText());
+            long id = Integer.parseInt(textCodi.getText());
             String nom = textNom.getText();
             String cognom1 = textCognom1.getText();
             String cognom2 = textCognom2.getText();

@@ -1,31 +1,63 @@
 package com.gamestock.client.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Classe que representa un lloguer d'un joc per part d'un client
  */
 public class Lloguer {
+    @JsonProperty("id")
+    private long id;
+    @JsonProperty("cliente_id")
     private long idClient;
+    @JsonProperty("juego_id")
     private long idJoc;
+    @JsonProperty("fechaAlquiler")
     private String dataLloguer;
+    @JsonProperty("fechaDevolucion")
     private String dataRetorn;
+    @JsonProperty("importe")
     private double preu;
+    @JsonProperty("activo")
+    private boolean actiu;
 
     /**
      * Crea un nou lloguer amb les dades especificades.
      *
-     * @param idClient    Identificador del client que realitza el lloguer.
-     * @param idJoc       Identificador del joc que es lloga.
+     * @param id Identificador de la transacció
+     * @param idClient Identificador del client que realitza el lloguer.
+     * @param idJoc Identificador del joc que es lloga.
      * @param dataLloguer Data de quan es va llogar el joc.
-     * @param dataRetorn  Data de quan s'ha de retornar el joc.
-     * @param preu        Import de la transacció del lloguer.
+     * @param dataRetorn Data de quan s'ha de retornar el joc.
+     * @param preu Import de la transacció del lloguer.
+     * @param actiu Camp que identifica si encara no s'ha tornat el joc
      */
-    public Lloguer(long idClient, long idJoc, String dataLloguer, String dataRetorn, double preu) {
+    public Lloguer(long id, long idClient, long idJoc, String dataLloguer, String dataRetorn, double preu, boolean actiu) {
+        this.id = id;
         this.idClient = idClient;
         this.idJoc = idJoc;
         this.dataLloguer = dataLloguer;
         this.dataRetorn = dataRetorn;
         this.preu = preu;
+        this.actiu = actiu;
     }
+
+    public boolean isActiu() {
+        return actiu;
+    }
+
+    public void setActiu(boolean actiu) {
+        this.actiu = actiu;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+    
 
     /**
      * Obté l'identificador del client que ha llogat el joc.
@@ -124,6 +156,6 @@ public class Lloguer {
      */
     @Override
     public String toString() {
-        return "Lloguer{" + "idClient=" + idClient + ", idJoc=" + idJoc + ", dataLloguer=" + dataLloguer + ", dataRetorn=" + dataRetorn + ", preu=" + preu + '}';
+        return "Lloguer{" + "idClient=" + idClient + ", idJoc=" + idJoc + ", dataLloguer=" + dataLloguer + ", dataRetorn=" + dataRetorn + ", preu=" + preu + ", actiu=" + actiu + '}';
     }
 }

@@ -15,7 +15,7 @@ public class ClientSocket {
              BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
 
             // Enviar un missatge al servidor
-            String message = "Hola des del client!";
+            String message = "/api/users/";
             out.println(message);
 
             // Llegir la resposta del servidor

@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class DialegUsuari extends JDialog {
+    private JTextField textId;
     private JTextField textUsername;
     private JPasswordField textPassword;
     private JTextField textEmail;
@@ -22,8 +23,9 @@ public class DialegUsuari extends JDialog {
 
     public DialegUsuari(Frame propietari, String titol, Usuari usuari) {
         this(propietari, titol);
+        textId.setText(String.valueOf(usuari.getId()));
+        textId.setEnabled(false);
         textUsername.setText(usuari.getUsername());
-        textUsername.setEditable(false); // No permetre canviar el nom d'usuari
         textPassword.setText(usuari.getPassword());
         textEmail.setText(usuari.getEmail());
         comboRole.setSelectedItem(usuari.getRole());
@@ -36,13 +38,14 @@ public class DialegUsuari extends JDialog {
         GridBagConstraints gbc = new GridBagConstraints();
 
         // Camps del formulari
-        addLabelAndField(panel, "Nom d'usuari:", textUsername = new JTextField(), 0, gbc);
-        addLabelAndField(panel, "Contrasenya:", textPassword = new JPasswordField(), 1, gbc);
-        addLabelAndField(panel, "Correu electrònic:", textEmail = new JTextField(), 2, gbc);
+        addLabelAndField(panel, "ID:", textId = new JTextField(), 0, gbc);
+        addLabelAndField(panel, "Nom d'usuari:", textUsername = new JTextField(), 1, gbc);
+        addLabelAndField(panel, "Contrasenya:", textPassword = new JPasswordField(), 2, gbc);
+        addLabelAndField(panel, "Correu electrònic:", textEmail = new JTextField(), 3, gbc);
 
         JLabel labelRole = new JLabel("Rol:");
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         gbc.anchor = GridBagConstraints.WEST;
         panel.add(labelRole, gbc);
 
@@ -81,6 +84,7 @@ public class DialegUsuari extends JDialog {
     }
 
     public void confirmar() {
+        long id = Long.parseLong(textId.getText());
         String username = textUsername.getText();
         String password = new String(textPassword.getPassword());
         String email = textEmail.getText();
@@ -91,7 +95,7 @@ public class DialegUsuari extends JDialog {
             return;
         }
 
-        usuari = new Usuari(username, password, email, role);
+        usuari = new Usuari(id, username, password, email, role);
         dispose();
     }
 

@@ -6,17 +6,18 @@ import com.gamestock.client.views.PantallaLogin;
 import javax.swing.*;
 
 /**
- * Controlador per a la pantalla de login de l'aplicació.
- * S'encarrega de gestionar la interacció de l'usuari amb la pantalla de login
- * i validar les credencials d'accés.
+ * Controlador per a la pantalla de login de l'aplicació. S'encarrega de
+ * gestionar la interacció de l'usuari amb la pantalla de login i validar les
+ * credencials d'accés.
  */
 public class ControladorLogin {
+
     private final PantallaLogin pantallaLogin;
     private final ServeiClient conexioServidor;
 
     /**
-     * Constructor del controlador de login.
-     * Inicialitza la pantalla de login i defineix el comportament en intentar fer login.
+     * Constructor del controlador de login. Inicialitza la pantalla de login i
+     * defineix el comportament en intentar fer login.
      */
     public ControladorLogin() {
         //Crea la pantalla per fer login
@@ -26,15 +27,25 @@ public class ControladorLogin {
         pantallaLogin.setSize(300, 250);
         pantallaLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pantallaLogin.setLocationRelativeTo(null); // Centra la finestra al centre de la pantalla
-        
+
         //Obté la connexió amb el servidor
         this.conexioServidor = ServeiClient.getInstance();
 
-        //Fins que el servidor no pugui autenticar usuaris, farem això:
-        
+        //El servidor encara no retorna si l'usuari es administrador o no, per tant
+        //tractem tots els usuaris com a usuaris normals
         pantallaLogin.afegirAccioLogin(e -> {
-               pantallaLogin.dispose();
-                new ControladorPrincipal(false);
+            String usuari = pantallaLogin.getUsuari();
+            String contrasenya = pantallaLogin.getContrasenya();
+
+            // Validar credencials amb el servidor
+            boolean validat = conexioServidor.validarCredencials(usuari, contrasenya);
+
+            if (validat) {
+                pantallaLogin.dispose();
+                new ControladorPrincipal(true);
+            } else {
+                JOptionPane.showMessageDialog(pantallaLogin, "Usuari o contrasenya incorrectes");
+            }
         });
         /*
         // Afegeix una acció que s'executa quan l'usuari intenta fer login
