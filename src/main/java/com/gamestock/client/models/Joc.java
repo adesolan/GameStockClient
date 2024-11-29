@@ -1,5 +1,9 @@
 package com.gamestock.client.models;
 
+/**
+ *
+ * @author Avery Lopez Jordan
+ */
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**

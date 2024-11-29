@@ -1,11 +1,17 @@
 package com.gamestock.client.views;
 
+/**
+ *
+ * @author Avery Lopez Jordan
+ */
 import com.gamestock.client.models.Joc;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
+/**
+ * The type Dialeg joc.
+ */
 public class DialegJoc extends JDialog {
     private JTextField textId;
     private JTextField textTitol;
@@ -17,11 +23,24 @@ public class DialegJoc extends JDialog {
     private JButton botoCancelar;
     private Joc joc;
 
+    /**
+     * Instantiates a new Dialeg joc.
+     *
+     * @param propietari the propietari
+     * @param titol      the titol
+     */
     public DialegJoc(Frame propietari, String titol) {
         super(propietari, titol, true);
         inicialitzarComponents();
     }
 
+    /**
+     * Instantiates a new Dialeg joc.
+     *
+     * @param propietari the propietari
+     * @param titol      the titol
+     * @param joc        the joc
+     */
     public DialegJoc(Frame propietari, String titol, Joc joc) {
         this(propietari, titol);
         textId.setText(String.valueOf(joc.getId()));
@@ -75,6 +94,9 @@ public class DialegJoc extends JDialog {
         panel.add(field, gbc);
     }
 
+    /**
+     * Confirmar.
+     */
     public void confirmar() {
         try {
             int id = Integer.parseInt(textId.getText());
@@ -96,12 +118,86 @@ public class DialegJoc extends JDialog {
         }
     }
 
+    /**
+     * Cancelar.
+     */
     public void cancelar() {
         joc = null;
         dispose();
     }
 
+    /**
+     * Gets joc.
+     *
+     * @return the joc
+     */
     public Joc getJoc() {
         return joc;
     }
+
+    public JTextField getTextId() {
+        return textId;
+    }
+
+    public void setTextId(JTextField textId) {
+        this.textId = textId;
+    }
+
+    public JTextField getTextTitol() {
+        return textTitol;
+    }
+
+    public void setTextTitol(JTextField textTitol) {
+        this.textTitol = textTitol;
+    }
+
+    public JTextField getTextGenere() {
+        return textGenere;
+    }
+
+    public void setTextGenere(JTextField textGenere) {
+        this.textGenere = textGenere;
+    }
+
+    public JTextField getTextEstudi() {
+        return textEstudi;
+    }
+
+    public void setTextEstudi(JTextField textEstudi) {
+        this.textEstudi = textEstudi;
+    }
+
+    public JTextField getTextPreuLloguer() {
+        return textPreuLloguer;
+    }
+
+    public void setTextPreuLloguer(JTextField textPreuLloguer) {
+        this.textPreuLloguer = textPreuLloguer;
+    }
+
+    public JTextField getTextStock() {
+        return textStock;
+    }
+
+    public void setTextStock(JTextField textStock) {
+        this.textStock = textStock;
+    }
+
+    public JButton getBotoConfirmar() {
+        return botoConfirmar;
+    }
+
+    public void setBotoConfirmar(JButton botoConfirmar) {
+        this.botoConfirmar = botoConfirmar;
+    }
+
+    public JButton getBotoCancelar() {
+        return botoCancelar;
+    }
+
+    public void setBotoCancelar(JButton botoCancelar) {
+        this.botoCancelar = botoCancelar;
+    }
+    
+    
 }

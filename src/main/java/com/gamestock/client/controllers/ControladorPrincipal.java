@@ -1,5 +1,9 @@
 package com.gamestock.client.controllers;
 
+/**
+ *
+ * @author Avery Lopez Jordan
+ */
 import com.gamestock.client.views.DialegClient;
 import com.gamestock.client.views.PantallaPrincipal;
 import com.gamestock.client.models.Client;
@@ -27,9 +31,21 @@ public class ControladorPrincipal {
     private final ServeiClient conexioServidor;
 
     private enum Contexte {
+        /**
+         * Clients contexte.
+         */
         CLIENTS,
+        /**
+         * Jocs contexte.
+         */
         JOCS,
+        /**
+         * Lloguers contexte.
+         */
         LLOGUERS,
+        /**
+         * Usuaris contexte.
+         */
         USUARIS
     }
     private Contexte contexteActual = Contexte.CLIENTS; //Inicialment carreguem clients
@@ -455,5 +471,20 @@ public class ControladorPrincipal {
             }
         });
     }
+
+    public PantallaPrincipal getPantallaPrincipal() {
+        return pantallaPrincipal;
+    }
+
+    public Contexte getContexteActual() {
+        return contexteActual;
+    }
+
+    public void setContexteActual(Contexte contexteActual) {
+        this.contexteActual = contexteActual;
+    }
+    
+    
+    
 
 }

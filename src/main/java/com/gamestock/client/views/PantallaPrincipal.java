@@ -1,5 +1,9 @@
 package com.gamestock.client.views;
 
+/**
+ *
+ * @author Avery Lopez Jordan
+ */
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -23,12 +27,17 @@ public class PantallaPrincipal extends JFrame {
     private JButton botoLloguers;
     private JButton botoUsuaris;
     private JButton botoLogout;
+    /**
+     * The Panel principal.
+     */
     public JPanel panelPrincipal;
     private boolean esAdministrador;
 
     /**
      * Constructor de la classe PantallaPrincipal. Configura la interfície
      * gràfica i inicialitza els components de la pantalla principal.
+     *
+     * @param esAdministrador the es administrador
      */
     public PantallaPrincipal(boolean esAdministrador) {
         this.esAdministrador = esAdministrador;
@@ -164,10 +173,20 @@ public class PantallaPrincipal extends JFrame {
         setLocationRelativeTo(getOwner());
     }
 
+    /**
+     * Gets boto logout.
+     *
+     * @return the boto logout
+     */
     public JButton getBotoLogout() {
         return botoLogout;
     }
 
+    /**
+     * Sets boto logout.
+     *
+     * @param botoLogout the boto logout
+     */
     public void setBotoLogout(JButton botoLogout) {
         this.botoLogout = botoLogout;
     }
@@ -190,82 +209,182 @@ public class PantallaPrincipal extends JFrame {
         return (DefaultTableModel) taulaPrincipal.getModel();
     }
 
+    /**
+     * Gets taula principal.
+     *
+     * @return the taula principal
+     */
     public JTable getTaulaPrincipal() {
         return taulaPrincipal;
     }
 
+    /**
+     * Sets taula principal.
+     *
+     * @param taulaPrincipal the taula principal
+     */
     public void setTaulaPrincipal(JTable taulaPrincipal) {
         this.taulaPrincipal = taulaPrincipal;
     }
 
+    /**
+     * Gets boto afegir.
+     *
+     * @return the boto afegir
+     */
     public JButton getBotoAfegir() {
         return botoAfegir;
     }
 
+    /**
+     * Sets boto afegir.
+     *
+     * @param botoAfegir the boto afegir
+     */
     public void setBotoAfegir(JButton botoAfegir) {
         this.botoAfegir = botoAfegir;
     }
 
+    /**
+     * Gets boto eliminar.
+     *
+     * @return the boto eliminar
+     */
     public JButton getBotoEliminar() {
         return botoEliminar;
     }
 
+    /**
+     * Sets boto eliminar.
+     *
+     * @param botoEliminar the boto eliminar
+     */
     public void setBotoEliminar(JButton botoEliminar) {
         this.botoEliminar = botoEliminar;
     }
 
+    /**
+     * Gets boto editar.
+     *
+     * @return the boto editar
+     */
     public JButton getBotoEditar() {
         return botoEditar;
     }
 
+    /**
+     * Sets boto editar.
+     *
+     * @param botoEditar the boto editar
+     */
     public void setBotoEditar(JButton botoEditar) {
         this.botoEditar = botoEditar;
     }
 
+    /**
+     * Gets boto clients.
+     *
+     * @return the boto clients
+     */
     public JButton getBotoClients() {
         return botoClients;
     }
 
+    /**
+     * Sets boto clients.
+     *
+     * @param botoClients the boto clients
+     */
     public void setBotoClients(JButton botoClients) {
         this.botoClients = botoClients;
     }
 
+    /**
+     * Gets boto jocs.
+     *
+     * @return the boto jocs
+     */
     public JButton getBotoJocs() {
         return botoJocs;
     }
 
+    /**
+     * Sets boto jocs.
+     *
+     * @param botoJocs the boto jocs
+     */
     public void setBotoJocs(JButton botoJocs) {
         this.botoJocs = botoJocs;
     }
 
+    /**
+     * Gets boto lloguers.
+     *
+     * @return the boto lloguers
+     */
     public JButton getBotoLloguers() {
         return botoLloguers;
     }
 
+    /**
+     * Sets boto lloguers.
+     *
+     * @param botoLloguers the boto lloguers
+     */
     public void setBotoLloguers(JButton botoLloguers) {
         this.botoLloguers = botoLloguers;
     }
 
+    /**
+     * Gets boto usuaris.
+     *
+     * @return the boto usuaris
+     */
     public JButton getBotoUsuaris() {
         return botoUsuaris;
     }
 
+    /**
+     * Sets boto usuaris.
+     *
+     * @param botoUsuaris the boto usuaris
+     */
     public void setBotoUsuaris(JButton botoUsuaris) {
         this.botoUsuaris = botoUsuaris;
     }
 
+    /**
+     * Gets panel principal.
+     *
+     * @return the panel principal
+     */
     public JPanel getPanelPrincipal() {
         return panelPrincipal;
     }
 
+    /**
+     * Sets panel principal.
+     *
+     * @param panelPrincipal the panel principal
+     */
     public void setPanelPrincipal(JPanel panelPrincipal) {
         this.panelPrincipal = panelPrincipal;
     }
 
+    /**
+     * Is es administrador boolean.
+     *
+     * @return the boolean
+     */
     public boolean isEsAdministrador() {
         return esAdministrador;
     }
 
+    /**
+     * Sets es administrador.
+     *
+     * @param esAdministrador the es administrador
+     */
     public void setEsAdministrador(boolean esAdministrador) {
         this.esAdministrador = esAdministrador;
     }

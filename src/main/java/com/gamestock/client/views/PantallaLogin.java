@@ -1,5 +1,9 @@
 package com.gamestock.client.views;
 
+/**
+ *
+ * @author Avery Lopez Jordan
+ */
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -12,6 +16,9 @@ public class PantallaLogin extends JFrame {
     private JTextField textUsuari;
     private JPasswordField textContrasenya;
     private JButton botoLogin;
+    /**
+     * The Panel login.
+     */
     public JPanel panelLogin;
 
     /**

@@ -1,5 +1,9 @@
 package com.gamestock.client;
 
+/**
+ *
+ * @author Avery Lopez Jordan
+ */
 import com.gamestock.client.controllers.ControladorLogin;
 import com.gamestock.client.serveis.ServeiClient;
 
@@ -8,7 +12,7 @@ import com.gamestock.client.serveis.ServeiClient;
  * Aquesta classe inicialitza la connexió amb el servidor i llança la finestra de login.
  */
 public class App {
-    
+
     /**
      * Mètode principal que s'executa quan s'inicia l'aplicació.
      * Inicialitza la connexió amb el servidor i mostra la finestra de login.

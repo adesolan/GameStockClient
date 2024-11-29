@@ -1,11 +1,17 @@
 package com.gamestock.client.views;
 
+/**
+ *
+ * @author Avery Lopez Jordan
+ */
 import com.gamestock.client.models.Lloguer;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
+/**
+ * The type Dialeg lloguer.
+ */
 public class DialegLloguer extends JDialog {
     private JTextField textId;
     private JTextField textIdClient;
@@ -18,11 +24,24 @@ public class DialegLloguer extends JDialog {
     private JButton botoCancelar;
     private Lloguer lloguer;
 
+    /**
+     * Instantiates a new Dialeg lloguer.
+     *
+     * @param propietari the propietari
+     * @param titol      the titol
+     */
     public DialegLloguer(Frame propietari, String titol) {
         super(propietari, titol, true);
         inicialitzarComponents();
     }
 
+    /**
+     * Instantiates a new Dialeg lloguer.
+     *
+     * @param propietari the propietari
+     * @param titol      the titol
+     * @param lloguer    the lloguer
+     */
     public DialegLloguer(Frame propietari, String titol, Lloguer lloguer) {
         this(propietari, titol);
         textId.setText(String.valueOf(lloguer.getId()));
@@ -88,6 +107,9 @@ public class DialegLloguer extends JDialog {
         panel.add(checkbox, gbc);
     }
 
+    /**
+     * Confirmar.
+     */
     public void confirmar() {
         try {
             long id = Long.parseLong(textId.getText());
@@ -110,12 +132,94 @@ public class DialegLloguer extends JDialog {
         }
     }
 
+    /**
+     * Cancelar.
+     */
     public void cancelar() {
         lloguer = null;
         dispose();
     }
 
+    /**
+     * Gets lloguer.
+     *
+     * @return the lloguer
+     */
     public Lloguer getLloguer() {
         return lloguer;
     }
+
+    public JTextField getTextId() {
+        return textId;
+    }
+
+    public void setTextId(JTextField textId) {
+        this.textId = textId;
+    }
+
+    public JTextField getTextIdClient() {
+        return textIdClient;
+    }
+
+    public void setTextIdClient(JTextField textIdClient) {
+        this.textIdClient = textIdClient;
+    }
+
+    public JTextField getTextIdJoc() {
+        return textIdJoc;
+    }
+
+    public void setTextIdJoc(JTextField textIdJoc) {
+        this.textIdJoc = textIdJoc;
+    }
+
+    public JTextField getTextDataLloguer() {
+        return textDataLloguer;
+    }
+
+    public void setTextDataLloguer(JTextField textDataLloguer) {
+        this.textDataLloguer = textDataLloguer;
+    }
+
+    public JTextField getTextDataRetorn() {
+        return textDataRetorn;
+    }
+
+    public void setTextDataRetorn(JTextField textDataRetorn) {
+        this.textDataRetorn = textDataRetorn;
+    }
+
+    public JTextField getTextPreu() {
+        return textPreu;
+    }
+
+    public void setTextPreu(JTextField textPreu) {
+        this.textPreu = textPreu;
+    }
+
+    public JCheckBox getCheckboxActiu() {
+        return checkboxActiu;
+    }
+
+    public void setCheckboxActiu(JCheckBox checkboxActiu) {
+        this.checkboxActiu = checkboxActiu;
+    }
+
+    public JButton getBotoConfirmar() {
+        return botoConfirmar;
+    }
+
+    public void setBotoConfirmar(JButton botoConfirmar) {
+        this.botoConfirmar = botoConfirmar;
+    }
+
+    public JButton getBotoCancelar() {
+        return botoCancelar;
+    }
+
+    public void setBotoCancelar(JButton botoCancelar) {
+        this.botoCancelar = botoCancelar;
+    }
+    
+    
 }

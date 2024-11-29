@@ -1,5 +1,9 @@
 package com.gamestock.client.models;
 
+/**
+ *
+ * @author Avery Lopez Jordan
+ */
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -24,13 +28,13 @@ public class Lloguer {
     /**
      * Crea un nou lloguer amb les dades especificades.
      *
-     * @param id Identificador de la transacció
-     * @param idClient Identificador del client que realitza el lloguer.
-     * @param idJoc Identificador del joc que es lloga.
+     * @param id          Identificador de la transacció
+     * @param idClient    Identificador del client que realitza el lloguer.
+     * @param idJoc       Identificador del joc que es lloga.
      * @param dataLloguer Data de quan es va llogar el joc.
-     * @param dataRetorn Data de quan s'ha de retornar el joc.
-     * @param preu Import de la transacció del lloguer.
-     * @param actiu Camp que identifica si encara no s'ha tornat el joc
+     * @param dataRetorn  Data de quan s'ha de retornar el joc.
+     * @param preu        Import de la transacció del lloguer.
+     * @param actiu       Camp que identifica si encara no s'ha tornat el joc
      */
     public Lloguer(long id, long idClient, long idJoc, String dataLloguer, String dataRetorn, double preu, boolean actiu) {
         this.id = id;
@@ -42,22 +46,42 @@ public class Lloguer {
         this.actiu = actiu;
     }
 
+    /**
+     * Is actiu boolean.
+     *
+     * @return the boolean
+     */
     public boolean isActiu() {
         return actiu;
     }
 
+    /**
+     * Sets actiu.
+     *
+     * @param actiu the actiu
+     */
     public void setActiu(boolean actiu) {
         this.actiu = actiu;
     }
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public long getId() {
         return id;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
     public void setId(long id) {
         this.id = id;
     }
-    
+
 
     /**
      * Obté l'identificador del client que ha llogat el joc.

@@ -1,11 +1,17 @@
 package com.gamestock.client.views;
 
+/**
+ *
+ * @author Avery Lopez Jordan
+ */
 import com.gamestock.client.models.Usuari;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
+/**
+ * The type Dialeg usuari.
+ */
 public class DialegUsuari extends JDialog {
     private JTextField textId;
     private JTextField textUsername;
@@ -16,11 +22,24 @@ public class DialegUsuari extends JDialog {
     private JButton botoCancelar;
     private Usuari usuari;
 
+    /**
+     * Instantiates a new Dialeg usuari.
+     *
+     * @param propietari the propietari
+     * @param titol      the titol
+     */
     public DialegUsuari(Frame propietari, String titol) {
         super(propietari, titol, true);
         inicialitzarComponents();
     }
 
+    /**
+     * Instantiates a new Dialeg usuari.
+     *
+     * @param propietari the propietari
+     * @param titol      the titol
+     * @param usuari     the usuari
+     */
     public DialegUsuari(Frame propietari, String titol, Usuari usuari) {
         this(propietari, titol);
         textId.setText(String.valueOf(usuari.getId()));
@@ -83,6 +102,9 @@ public class DialegUsuari extends JDialog {
         panel.add(field, gbc);
     }
 
+    /**
+     * Confirmar.
+     */
     public void confirmar() {
         long id = Long.parseLong(textId.getText());
         String username = textUsername.getText();
@@ -99,12 +121,78 @@ public class DialegUsuari extends JDialog {
         dispose();
     }
 
+    /**
+     * Cancelar.
+     */
     public void cancelar() {
         usuari = null;
         dispose();
     }
 
+    /**
+     * Gets usuari.
+     *
+     * @return the usuari
+     */
     public Usuari getUsuari() {
         return usuari;
     }
+
+    public JTextField getTextId() {
+        return textId;
+    }
+
+    public void setTextId(JTextField textId) {
+        this.textId = textId;
+    }
+
+    public JTextField getTextUsername() {
+        return textUsername;
+    }
+
+    public void setTextUsername(JTextField textUsername) {
+        this.textUsername = textUsername;
+    }
+
+    public JPasswordField getTextPassword() {
+        return textPassword;
+    }
+
+    public void setTextPassword(JPasswordField textPassword) {
+        this.textPassword = textPassword;
+    }
+
+    public JTextField getTextEmail() {
+        return textEmail;
+    }
+
+    public void setTextEmail(JTextField textEmail) {
+        this.textEmail = textEmail;
+    }
+
+    public JComboBox<String> getComboRole() {
+        return comboRole;
+    }
+
+    public void setComboRole(JComboBox<String> comboRole) {
+        this.comboRole = comboRole;
+    }
+
+    public JButton getBotoConfirmar() {
+        return botoConfirmar;
+    }
+
+    public void setBotoConfirmar(JButton botoConfirmar) {
+        this.botoConfirmar = botoConfirmar;
+    }
+
+    public JButton getBotoCancelar() {
+        return botoCancelar;
+    }
+
+    public void setBotoCancelar(JButton botoCancelar) {
+        this.botoCancelar = botoCancelar;
+    }
+    
+    
 }

@@ -1,7 +1,10 @@
 package com.gamestock.client.views;
 
+/**
+ *
+ * @author Avery Lopez Jordan
+ */
 import com.gamestock.client.models.Client;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -281,26 +284,56 @@ public class DialegClient extends JDialog {
         return botoCancelar;
     }
 
+    /**
+     * Gets text cognom 1.
+     *
+     * @return the text cognom 1
+     */
     public JTextField getTextCognom1() {
         return textCognom1;
     }
 
+    /**
+     * Sets text cognom 1.
+     *
+     * @param textCognom1 the text cognom 1
+     */
     public void setTextCognom1(JTextField textCognom1) {
         this.textCognom1 = textCognom1;
     }
 
+    /**
+     * Gets text cognom 2.
+     *
+     * @return the text cognom 2
+     */
     public JTextField getTextCognom2() {
         return textCognom2;
     }
 
+    /**
+     * Sets text cognom 2.
+     *
+     * @param textCognom2 the text cognom 2
+     */
     public void setTextCognom2(JTextField textCognom2) {
         this.textCognom2 = textCognom2;
     }
 
+    /**
+     * Gets panel dialeg.
+     *
+     * @return the panel dialeg
+     */
     public JPanel getPanelDialeg() {
         return panelDialeg;
     }
 
+    /**
+     * Sets panel dialeg.
+     *
+     * @param panelDialeg the panel dialeg
+     */
     public void setPanelDialeg(JPanel panelDialeg) {
         this.panelDialeg = panelDialeg;
     }

@@ -1,5 +1,9 @@
 package com.gamestock.client.serveis;
 
+/**
+ *
+ * @author Avery Lopez Jordan
+ */
 import com.gamestock.client.models.Client;
 import com.gamestock.client.models.Joc;
 import com.gamestock.client.models.Lloguer;
@@ -10,7 +14,6 @@ import java.util.ArrayList;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
-
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
@@ -18,8 +21,10 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.reactive.function.BodyInserters;
 
+/**
+ * The type Servei client.
+ */
 public class ServeiClient {
 
     private static ServeiClient instance;
@@ -36,7 +41,13 @@ public class ServeiClient {
                 .build();
     }
 
-    // Mètode estàtic per obtenir la instància del singleton
+    /**
+     * Gets instance.
+     *
+     * @param baseUrl the base url
+     * @return the instance
+     */
+// Mètode estàtic per obtenir la instància del singleton
     public static ServeiClient getInstance(String baseUrl) {
         if (instance == null) {
             synchronized (ServeiClient.class) {
@@ -48,6 +59,11 @@ public class ServeiClient {
         return instance;
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static ServeiClient getInstance() {
         if (instance == null) {
             throw new IllegalStateException("L'instància encara no ha estat inicialitzada. Crida a getInstance(baseUrl) primer.");
@@ -55,25 +71,45 @@ public class ServeiClient {
         return instance;
     }
 
-    // Obtenir tots els clients
+    /**
+     * Obtenir clients list.
+     *
+     * @return the list
+     */
+// Obtenir tots els clients
     public List<Client> obtenirClients() {
         String url = "/api/clientes";
         return obtenirDades(url, Client.class);
     }
 
-    // Obtenir tots els jocs
+    /**
+     * Obtenir jocs list.
+     *
+     * @return the list
+     */
+// Obtenir tots els jocs
     public List<Joc> obtenirJocs() {
         String url = "/api/juegos";
         return obtenirDades(url, Joc.class);
     }
 
-    // Obtenir tots els lloguers
+    /**
+     * Obtenir lloguers list.
+     *
+     * @return the list
+     */
+// Obtenir tots els lloguers
     public List<Lloguer> obtenirLloguers() {
         String url = "/api/alquileres";
         return obtenirDades(url, Lloguer.class);
     }
 
-    // Obtenir tots els usuaris
+    /**
+     * Obtenir usuaris list.
+     *
+     * @return the list
+     */
+// Obtenir tots els usuaris
     public List<Usuari> obtenirUsuaris() {
         String url = "/api/users";
         return obtenirDades(url, Usuari.class);
@@ -105,7 +141,13 @@ public class ServeiClient {
         return result;  // Retornem la llista de resultats
     }
 
-    // Afegir un client
+    /**
+     * Afegir client boolean.
+     *
+     * @param nouClient the nou client
+     * @return the boolean
+     */
+// Afegir un client
     public boolean afegirClient(Client nouClient) {
         String url = "/api/clientes";
         System.out.println(nouClient);
@@ -124,7 +166,13 @@ public class ServeiClient {
         }
     }
 
-    // Eliminar un client per ID
+    /**
+     * Eliminar client boolean.
+     *
+     * @param id the id
+     * @return the boolean
+     */
+// Eliminar un client per ID
     public boolean eliminarClient(long id) {
         String url = "/api/clientes/" + id;
         Mono<String> response = webClient.delete()
@@ -135,7 +183,13 @@ public class ServeiClient {
         return !StringUtils.isEmpty(response.block());
     }
 
-    // Editar un client
+    /**
+     * Editar client boolean.
+     *
+     * @param clientEditat the client editat
+     * @return the boolean
+     */
+// Editar un client
     public boolean editarClient(Client clientEditat) {
         String url = "/api/clientes/" + clientEditat.getId();
         Mono<String> response = webClient.put()
@@ -147,7 +201,13 @@ public class ServeiClient {
         return !StringUtils.isEmpty(response.block());
     }
 
-    // Afegir un joc
+    /**
+     * Afegir joc boolean.
+     *
+     * @param nouJoc the nou joc
+     * @return the boolean
+     */
+// Afegir un joc
     public boolean afegirJoc(Joc nouJoc) {
         String url = "/api/juegos";
         Mono<String> response = webClient.post()
@@ -159,7 +219,13 @@ public class ServeiClient {
         return !StringUtils.isEmpty(response.block());
     }
 
-    // Eliminar un joc per ID
+    /**
+     * Eliminar joc boolean.
+     *
+     * @param id the id
+     * @return the boolean
+     */
+// Eliminar un joc per ID
     public boolean eliminarJoc(long id) {
         String url = "/api/juegos/" + id;
         Mono<String> response = webClient.delete()
@@ -170,7 +236,13 @@ public class ServeiClient {
         return !StringUtils.isEmpty(response.block());
     }
 
-    // Editar un joc
+    /**
+     * Editar joc boolean.
+     *
+     * @param jocEditat the joc editat
+     * @return the boolean
+     */
+// Editar un joc
     public boolean editarJoc(Joc jocEditat) {
         String url = "/api/juegos/" + jocEditat.getId();
         Mono<String> response = webClient.put()
@@ -182,7 +254,13 @@ public class ServeiClient {
         return !StringUtils.isEmpty(response.block());
     }
 
-    // Afegir un lloguer
+    /**
+     * Afegir lloguer boolean.
+     *
+     * @param nouLloguer the nou lloguer
+     * @return the boolean
+     */
+// Afegir un lloguer
     public boolean afegirLloguer(Lloguer nouLloguer) {
         String url = "/api/alquileres";
         Mono<String> response = webClient.post()
@@ -194,7 +272,13 @@ public class ServeiClient {
         return !StringUtils.isEmpty(response.block());
     }
 
-    // Eliminar un lloguer
+    /**
+     * Eliminar lloguer boolean.
+     *
+     * @param id the id
+     * @return the boolean
+     */
+// Eliminar un lloguer
     public boolean eliminarLloguer(long id) {
         String url = "/api/alquileres/" + id;
         Mono<String> response = webClient.delete()
@@ -205,7 +289,13 @@ public class ServeiClient {
         return !StringUtils.isEmpty(response.block());
     }
 
-    // Editar un lloguer
+    /**
+     * Editar lloguer boolean.
+     *
+     * @param lloguerEditat the lloguer editat
+     * @return the boolean
+     */
+// Editar un lloguer
     public boolean editarLloguer(Lloguer lloguerEditat) {
         String url = "/api/alquileres/" + lloguerEditat.getIdClient();
         Mono<String> response = webClient.put()
@@ -217,7 +307,13 @@ public class ServeiClient {
         return !StringUtils.isEmpty(response.block());
     }
 
-    // Afegir un usuari
+    /**
+     * Afegir usuari boolean.
+     *
+     * @param nouUsuari the nou usuari
+     * @return the boolean
+     */
+// Afegir un usuari
     public boolean afegirUsuari(Usuari nouUsuari) {
         String url = "/api/users";
         Mono<String> response = webClient.post()
@@ -229,7 +325,13 @@ public class ServeiClient {
         return !StringUtils.isEmpty(response.block());
     }
 
-    // Eliminar un usuari
+    /**
+     * Eliminar usuari boolean.
+     *
+     * @param id the id
+     * @return the boolean
+     */
+// Eliminar un usuari
     public boolean eliminarUsuari(long id) {
         String url = "/api/users/" + id;
         Mono<String> response = webClient.delete()
@@ -240,7 +342,13 @@ public class ServeiClient {
         return !StringUtils.isEmpty(response.block());
     }
 
-    // Editar un usuari
+    /**
+     * Editar usuari boolean.
+     *
+     * @param usuariEditat the usuari editat
+     * @return the boolean
+     */
+// Editar un usuari
     public boolean editarUsuari(Usuari usuariEditat) {
         String url = "/api/users/" + usuariEditat.getId();
         Mono<String> response = webClient.put()
@@ -252,7 +360,13 @@ public class ServeiClient {
         return !StringUtils.isEmpty(response.block());
     }
 
-    // Obtenir un client pel seu ID
+    /**
+     * Obtenir client per id client.
+     *
+     * @param id the id
+     * @return the client
+     */
+// Obtenir un client pel seu ID
     public Client obtenirClientPerId(long id) {
         String url = "/api/clientes/" + id;
         try {
@@ -266,7 +380,14 @@ public class ServeiClient {
             return null;
         }
     }
-    
+
+    /**
+     * Validar credencials boolean.
+     *
+     * @param usuari      the usuari
+     * @param contrasenya the contrasenya
+     * @return the boolean
+     */
     public boolean validarCredencials(String usuari, String contrasenya) {
     String url = "/api/users/login";
     try {
@@ -295,7 +416,12 @@ public class ServeiClient {
     }
 }
 
-    // Tancar sessió
+    /**
+     * Tancar sessio boolean.
+     *
+     * @return the boolean
+     */
+// Tancar sessió
     public boolean tancarSessio() {
         String url = "/api/users/logout";
         try {

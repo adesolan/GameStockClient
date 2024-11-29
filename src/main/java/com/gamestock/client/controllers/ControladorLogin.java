@@ -1,5 +1,9 @@
 package com.gamestock.client.controllers;
 
+/**
+ *
+ * @author Avery Lopez Jordan
+ */
 import com.gamestock.client.serveis.ServeiClient;
 import com.gamestock.client.views.PantallaLogin;
 
@@ -14,6 +18,7 @@ public class ControladorLogin {
 
     private final PantallaLogin pantallaLogin;
     private final ServeiClient conexioServidor;
+    private boolean validat;
 
     /**
      * Constructor del controlador de login. Inicialitza la pantalla de login i
@@ -38,7 +43,7 @@ public class ControladorLogin {
             String contrasenya = pantallaLogin.getContrasenya();
 
             // Validar credencials amb el servidor
-            boolean validat = conexioServidor.validarCredencials(usuari, contrasenya);
+            validat = conexioServidor.validarCredencials(usuari, contrasenya);
 
             if (validat) {
                 pantallaLogin.dispose();
@@ -71,4 +76,19 @@ public class ControladorLogin {
 
         pantallaLogin.setVisible(true);
     }
+
+    public PantallaLogin getPantallaLogin() {
+        return pantallaLogin;
+    }
+
+    public ServeiClient getConexioServidor() {
+        return conexioServidor;
+    }
+
+    public boolean isValidat() {
+        return validat;
+    }
+    
+    
+    
 }

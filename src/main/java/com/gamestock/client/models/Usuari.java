@@ -1,5 +1,9 @@
 package com.gamestock.client.models;
 
+/**
+ *
+ * @author Avery Lopez Jordan
+ */
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -20,6 +24,7 @@ public class Usuari {
     /**
      * Crea un nou usuari amb les dades especificades.
      *
+     * @param id       the id
      * @param username Nom d'usuari.
      * @param password Contrasenya de l'usuari.
      * @param email    Correu electrònic de l'usuari.
@@ -33,16 +38,25 @@ public class Usuari {
         this.role = role;
     }
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public long getId() {
         return id;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
     public void setId(long id) {
         this.id = id;
     }
 
-    
-    
+
     /**
      * Obté el nom d'usuari.
      *
