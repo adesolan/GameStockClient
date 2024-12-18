@@ -25,7 +25,7 @@ public class LoginTest {
      */
     @BeforeEach
     void setUp() {
-        conexioServidor = ServeiClient.getInstance("http://127.0.0.1:9090");
+        conexioServidor = ServeiClient.getInstance("https://127.0.0.1:9090");
         controladorLogin = new ControladorLogin();
         pantallaLogin = controladorLogin.getPantallaLogin();
     }
@@ -36,7 +36,7 @@ public class LoginTest {
      */
     @Test
     void testLogin() {
-        pantallaLogin.getTextUsuari().setText("avery");
+        pantallaLogin.getTextUsuari().setText("avery2");
         pantallaLogin.getTextContrasenya().setText("avery");
         pantallaLogin.getBotoLogin().doClick();
         assert(controladorLogin.isValidat());

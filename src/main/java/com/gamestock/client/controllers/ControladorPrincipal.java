@@ -128,6 +128,34 @@ public class ControladorPrincipal {
             Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void carregarRanking() {
+        try {
+            String[] nomColumnes = {"ID", "Títol", "Gènere", "Estudi", "Preu Lloguer", "Stock"};
+            Object[][] dades = new Object[][]{};
+            DefaultTableModel model = new DefaultTableModel(dades, nomColumnes);
+
+            // Obtenim la llista de jocs del servidor
+            List<Joc> jocs = conexioServidor.obtenirRankingJocs();
+
+            // Afegim cada joc a la taula
+            for (Joc joc : jocs) {
+                model.addRow(new Object[]{
+                    joc.getId(),
+                    joc.getTitol(),
+                    joc.getGenere(),
+                    joc.getEstudi(),
+                    joc.getPreuLloguer(),
+                    joc.getStock()
+                });
+            }
+
+            // Actualitza el model de la taula a la vista
+            pantallaPrincipal.canviaModelTaula(model);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladorPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     /**
      * Carrega la llista de lloguers des del servidor i la mostra en la taula de
@@ -390,12 +418,18 @@ public class ControladorPrincipal {
             setContexte(Contexte.LLOGUERS);
             carregarLloguers();
         });
+        pantallaPrincipal.getBotoRanking().addActionListener(e -> {
+            carregarRanking();
+            
+        });
+        
         if (pantallaPrincipal.isEsAdministrador()) {
             pantallaPrincipal.getBotoUsuaris().addActionListener(e -> {
                 setContexte(Contexte.USUARIS);
                 carregarUsuaris();
             });
         }
+        
 
         // Listener per afegir un nou element
         pantallaPrincipal.getBotoAfegir().addActionListener(e -> {
@@ -470,6 +504,9 @@ public class ControladorPrincipal {
                 );
             }
         });
+        
+        
+                
     }
 
     public PantallaPrincipal getPantallaPrincipal() {

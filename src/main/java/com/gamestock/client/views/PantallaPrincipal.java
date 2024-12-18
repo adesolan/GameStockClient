@@ -27,6 +27,8 @@ public class PantallaPrincipal extends JFrame {
     private JButton botoLloguers;
     private JButton botoUsuaris;
     private JButton botoLogout;
+    private JButton botoRanking;
+    
     /**
      * The Panel principal.
      */
@@ -128,12 +130,21 @@ public class PantallaPrincipal extends JFrame {
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel1.add(botoLloguers, gbc);
+        
+        botoRanking = new JButton();
+        botoRanking.setText("Ranking");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 8;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        panel1.add(botoRanking, gbc);
 
         if (esAdministrador) {
             botoUsuaris = new JButton("Usuaris");
             gbc = new GridBagConstraints();
             gbc.gridx = 0;
-            gbc.gridy = 8;
+            gbc.gridy = 9;
             gbc.weightx = 1.0;
             gbc.fill = GridBagConstraints.HORIZONTAL;
             panel1.add(botoUsuaris, gbc);
@@ -143,7 +154,7 @@ public class PantallaPrincipal extends JFrame {
         final JPanel separador = new JPanel();
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 9;
+        gbc.gridy = 10;
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel1.add(separador, gbc);
@@ -152,7 +163,7 @@ public class PantallaPrincipal extends JFrame {
         botoLogout = new JButton("Logout");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 10;
+        gbc.gridy = 11;
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel1.add(botoLogout, gbc);
@@ -388,5 +399,17 @@ public class PantallaPrincipal extends JFrame {
     public void setEsAdministrador(boolean esAdministrador) {
         this.esAdministrador = esAdministrador;
     }
+
+    public JButton getBotoRanking() {
+        return botoRanking;
+    }
+
+    public void setBotoRanking(JButton botoRanking) {
+        this.botoRanking = botoRanking;
+    }
+
+
+    
+    
 
 }

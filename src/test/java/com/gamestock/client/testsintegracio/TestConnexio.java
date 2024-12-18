@@ -17,7 +17,7 @@ public class TestConnexio {
     
     @BeforeEach
     void setUp() {
-        conexioServidor = ServeiClient.getInstance("http://127.0.0.1:9090");
+        conexioServidor = ServeiClient.getInstance("https://127.0.0.1:9090");
     }
     
     @Test

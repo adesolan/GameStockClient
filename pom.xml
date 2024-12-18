@@ -23,6 +23,7 @@
         <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <swing.defaultlaf>com.sun.java.swing.plaf.gtk.GTKLookAndFeel</swing.defaultlaf>
+        <com.sun.jndi.ldap.object.disableEndpointIdentification>true</com.sun.jndi.ldap.object.disableEndpointIdentification>
     </properties>
 
     <dependencies>

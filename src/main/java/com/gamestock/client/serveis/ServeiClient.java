@@ -10,6 +10,10 @@ import com.gamestock.client.models.Lloguer;
 import com.gamestock.client.models.Usuari;
 import com.gamestock.client.models.RespostaLogin;
 import io.micrometer.common.util.StringUtils;
+import io.netty.handler.ssl.SslContext;
+import io.netty.handler.ssl.SslContextBuilder;
+import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
+import java.security.KeyStore;
 import java.util.ArrayList;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
@@ -18,9 +22,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManagerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.client.reactive.ReactorClientHttpConnector;
+import reactor.netty.http.client.HttpClient;
 
 /**
  * The type Servei client.
@@ -34,11 +43,42 @@ public class ServeiClient {
 
     // Constructor privat per al singleton
     private ServeiClient(String baseUrl) {
+
         this.baseUrl = baseUrl;
         this.webClient = WebClient.builder()
                 .baseUrl(baseUrl) // Assigna la base URL passada com a paràmetre
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .clientConnector(new ReactorClientHttpConnector(HttpClient.create()
+                        .secure(t -> t.sslContext(createSSLContext())))) // Configura SSL
                 .build();
+    }
+    
+    /**
+     * Configuració de l'SSLContext per a HTTPS.
+     */
+    private SslContext createSSLContext() {
+        try {
+            // Càrrega del keystore (gamestock-keystore.p12)
+            KeyStore keyStore = KeyStore.getInstance("PKCS12");
+            try (var keyStoreStream = getClass().getClassLoader().getResourceAsStream("gamestock-keystore.p12")) {
+                if (keyStoreStream == null) {
+                    throw new IllegalArgumentException("No s'ha trobat el fitxer keystore gamestock-keystore.p12 al classpath.");
+                }
+                keyStore.load(keyStoreStream, "898989".toCharArray());
+            }
+
+            KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
+            keyManagerFactory.init(keyStore, "898989".toCharArray());
+
+            // Configurem SSLContext amb el TrustManager
+            return SslContextBuilder.forClient()
+            .keyManager(keyManagerFactory)
+            .trustManager(InsecureTrustManagerFactory.INSTANCE)
+            .build();
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error configurant SSLContext: " + e.getMessage(), e);
+        }
     }
 
     /**
@@ -113,6 +153,11 @@ public class ServeiClient {
     public List<Usuari> obtenirUsuaris() {
         String url = "/api/users";
         return obtenirDades(url, Usuari.class);
+    }
+    
+    public List<Joc> obtenirRankingJocs() {
+        String url = "/api/juegos/ranking";
+        return obtenirDades(url, Joc.class);
     }
 
     // Mètode genèric per obtenir dades des del servidor
@@ -410,7 +455,7 @@ public class ServeiClient {
         if (e.getStatusCode() == HttpStatus.UNAUTHORIZED) {
             System.err.println("Credencials incorrectes: " + e.getMessage());
         } else {
-            System.err.println("Error inesperat: " + e.getMessage());
+                System.err.println("Error inesperat: " + e.getMessage());
         }
         return false;
     }
